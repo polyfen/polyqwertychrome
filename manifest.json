@@ -1,0 +1,10 @@
+{
+    "manifest_version": 4,
+    "name": "Poly Qwerty",
+    "description": "Your keyboard's assistant.",
+    "version": "1.0",
+    "action": {
+      "default_popup": "index.html",
+      "default_icon": "poly-qwerty-icon.png"
+    }
+  }
