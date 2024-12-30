@@ -1,13 +1,17 @@
 * {
     font-family: "Figtree", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
 }
-  
+
 :has(:target) {
     scroll-behavior: smooth;
 }
 
+section {
+    scroll-margin-top: 3rem;
+}
+
 body.light-theme {
-    background:#f6f8fe;
+    background: #f6f8fe;
 }
 
 body.dark-mode {
@@ -25,7 +29,8 @@ header {
 
 aside {
     float: left;
-    position: fixed;
+    position: sticky;
+    top: 25px;
 }
 
 aside ul {
@@ -34,6 +39,10 @@ aside ul {
 
 aside ul li {
     font-size: 1.2rem;
+    margin-bottom: 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
 }
 
 .key {
@@ -68,6 +77,7 @@ header {
     align-items: center;
     justify-content: space-between;
 }
+
 footer {
     justify-content: center !important;
     margin-bottom: 20px;
@@ -75,10 +85,6 @@ footer {
 
 span#click {
     color: #fcb300;
-}
-
-section#diacritics {
-    margin-top: 80px;
 }
 
 header a img {
@@ -89,12 +95,42 @@ header a#github {
     display: flex;
     justify-content: flex-end;
 }
+header #chrome-store {
+    display: none;
+    gap: 11px 
+}
+#chrome-store img {
+width: 39px;
+height: 33px;
+}
+
+#chrome-store span {
+    max-width: 80px;
+}
+
+#chrome-store span {
+    font-family: Biotif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: left;
+
+}
+
+@media (min-width: 768px) { 
+    header {
+        grid-template-columns: auto auto auto;
+    }
+    header #chrome-store {
+        display: flex;
+    }
+}
 
 div.key-section {
     display: grid;
     justify-items: center;
     justify-content: center;
-    grid-template-columns: repeat(auto-fit , 66px);
+    grid-template-columns: repeat(auto-fit, 66px);
     grid-gap: 10px;
 }
 
@@ -103,11 +139,21 @@ section h2.heading-1 {
     margin-bottom: 0;
 }
 
+section h3 {
+    margin-block: 20px;
+}
+
+@media (min-width: 1280px) {
+    section h2.heading-1 {
+        margin-top: 100px;
+    }
+}
+
 p#confirm {
     display: none;
     position: fixed;
     top: 80vh;
-    left:44vw;
+    left: 44vw;
     z-index: 100;
     color: #fcb300;
     font-size: 32px;
@@ -122,34 +168,16 @@ p#confirm {
 
 .anime {
     display: block !important;
-    animation-name: popUp;
-    animation-duration: 1.5s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-
-   }
-
-@keyframes popUp {
-    0%  {
-        display: block;
-        opacity: 1;
-    }
-    70% {
-        display: block;
-        opacity: 1;
-    }
-    100% {
-        display: none;
-        opacity: 0;
-    }
 }
+
+
 
 /* break points */
 @media (max-width: 890px) {
     div.key-section {
         grid-gap: 8px;
     }
+
     p#confirm {
         left: 32vw;
     }
@@ -163,7 +191,21 @@ p#confirm {
 
 @media (max-width: 1280px) {
     aside {
-        display: none;
+        float: none;
+        margin-bottom: 4rem;
+        margin-top: 0;
+        position: relative !important;
+    }
+
+    aside li {
+        margin-bottom: 8px !important;
+    }
+
+    aside ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, auto);
+        gap: 8px;
     }
 }
 
@@ -177,20 +219,58 @@ p#confirm {
 
 
 nav ul {
-    list-style: none; /* Remove default bullets */
-}
-nav ul li::before {
-    content: "•"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
-    color: hsl(0, 0%, 100%); /* Change the color */
-    font-weight: bold; /* If you want it to be bold */
-    display: inline-block; /* Needed to add space between the bullet and the text */
-    width: 1em; /* Also needed for space (tweak if needed) */
-    margin-left: -1em; /* Also needed for space (tweak if needed) */
+    list-style: none;
+    /* Remove default bullets */
 }
 
-nav ul ul {
+nav ul li::before {
+    content: "•";
+    font-weight: bold;
+    display: inline-block;
+    width: 24px;
+    margin-left: -1em;
+    height: 24px;
+    text-align: center;
+    border-radius: 2px;
+    margin-right: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.25px solid #fcb102cc;
+    color: #fcb102cc;
+}
+
+nav ul li a.active {
+    color: #FFFFFF;
+}
+
+nav .sub-ul {
     display: none;
 }
+
+nav ul li:has(a.active[href="#emojis"]) > ul {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 180px;
+    width: 180px;
+}
+
+.sub-ul li::before {
+    background: none !important;
+    color: white;
+    border: none;
+}
+
+nav ul li:has(a.active)::before {
+    color: #060819;
+    background: #fcb302;
+}
+
+ul ul li a {
+    font-size: 15px;
+}
+
 
 nav ul li#diacratics-anchor::before {
     content: "À";
@@ -214,6 +294,180 @@ nav ul li#arrows-anchor::before {
 
 nav ul li#emojis-anchor::before {
     content: "😀";
-    margin-left: -1.4rem;
-    margin-right: 0.2rem;
+}
+
+/* search bar */
+form.search {
+    background-color: #fcb500cc;
+    backdrop-filter: blur(10px);
+    width: 200px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    margin: 24px auto 50px;
+    position: sticky;
+    top: 25px;
+}
+
+.search input {
+    all: unset;
+    font: 16px system-ui;
+    color: black;
+    height: 100%;
+    width: 100%;
+    padding: 6px 10px;
+}
+
+::placeholder {
+    color: black;
+    opacity: 0.7;
+}
+
+.search button {
+    all: unset;
+    cursor: default;
+    width: 44px;
+    height: 44px;
+}
+
+button svg {
+    color: #fff;
+    fill: currentColor;
+    width: 24px;
+    height: 24px;
+    padding: 10px;
+}
+
+/* Quita el botón de limpiar en el input type: search  */
+#searchbar::-webkit-search-clear-button,
+#searchbar::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+}
+
+#searchbar::-moz-search-clear-button,
+#searchbar::-moz-search-cancel-button {
+    -moz-appearance: none;
+    appearance: none;
+    display: none;
+}
+
+/* Oculta las secciones que no tienen ningun boton visibles */
+section:not(:has(button[style*="display: block"])) {
+    display: none;
+}
+
+/* en cascada, da como default display:block por que el selector lo toma al stylo inline*/
+section:not(:has(button[style*="display: none"])) {
+    display: block;
+}
+
+/* Oculta las secciones que no tienen ningun boton visibles */
+.sub:not(:has(button[style*="display: block"])) {
+    display: none;
+}
+
+/* en cascada, da como default display:block por que el selector lo toma al stylo inline*/
+.sub:not(:has(button[style*="display: none"])) {
+    display: block;
+}
+
+/* END search bar */
+
+/* tooltip */
+
+#tooltip {
+    background: #333;
+    width: fit-content;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+    display: none;
+}
+
+#tooltip[data-show] {
+    display: block;
+}
+
+#arrow,
+#arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: inherit;
+}
+
+#arrow {
+    visibility: hidden;
+}
+
+#arrow::before {
+    visibility: visible;
+    content: '';
+    transform: rotate(45deg);
+}
+
+#tooltip[data-popper-placement^='top']>#arrow {
+    bottom: -4px;
+}
+
+#tooltip[data-popper-placement^='bottom']>#arrow {
+    top: -4px;
+}
+
+#tooltip[data-popper-placement^='left']>#arrow {
+    right: -4px;
+}
+
+#tooltip[data-popper-placement^='right']>#arrow {
+    left: -4px;
+}
+
+/* END tooltip */
+
+body {
+    border-top: 8px solid #fcb402;
+}
+
+body.dark-mode hr {
+    border-color: #ffffff21 !important;
+}
+
+#borrador {
+    display: none;
+    cursor: pointer;
+    
+}
+
+form.search:has(#searchbar:active), form.search:has(#searchbar:focus) {
+    background: #fcb300;
+}
+
+@media (min-width: 768px) {
+}
+
+h1 {
+    margin-bottom: 1.5rem !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+@media (max-width: 1200px) {
+    nav ul li::before {
+        background: #fcb300;
+        color: #000000;
+    }
+
+    .cover {display: none;}
+
+    form.search {
+        margin-bottom: -40px !important;
+        width: 370px;
+        max-width: 100%;
+    }
 }
