@@ -22,7 +22,7 @@
     <!-- CSS General -->
     <link rel="stylesheet" href="app/css/polynucleus.css">
     <link rel="stylesheet" href="app/css/styles.css">
-    <!-- js genral-->
+    <!-- js general -->
     <script src="app/js/current-section.js" defer></script>
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,133 +47,6 @@
     <meta name="twitter:image" content="">
     <meta name="robots" content="index, follow">
     <!-- PAGE-SPECIFIC META end -->
-
-
-
-    <!-- Script-Create-Buttons-start-->
-    <script type="module">
-        import currencies from './app/js/currencies.js';
-
-        const currenciesDiv = document.getElementById('currencies-buttons');
-        currencies.forEach(array => {
-            let btn = document.createElement('button');
-
-            btn.innerHTML = array.text;
-            btn.className = 'key';
-            btn.id = array.id;
-            btn.dataset.title = array.dataTitle;
-
-            currenciesDiv.appendChild(btn);
-        });
-    </script>
-    <script type="module">
-        import punctuation from './app/js/punctuation.js';
-
-        const punctuationDiv = document.getElementById('punctuation-buttons');
-        punctuation.forEach(array => {
-            let btn = document.createElement('button');
-
-            btn.innerHTML = array.text;
-            btn.className = 'key';
-            btn.id = array.id;
-            btn.dataset.title = array.dataTitle;
-
-            punctuationDiv.appendChild(btn);
-        });
-    </script>
-    <script type="module">
-        import diacritics from './app/js/diacritics.js';
-
-        const diacriticsDiv = document.getElementById('diacritics-buttons');
-        diacritics.forEach(array => {
-            let btn = document.createElement('button');
-
-            btn.innerHTML = array.text;
-            btn.className = 'key';
-            btn.id = array.id;
-            btn.dataset.title = array.dataTitle;
-
-            diacriticsDiv.appendChild(btn);
-        });
-    </script>
-
-    <script type="module">
-        import math from './app/js/math.js';
-
-        const mathDiv = document.getElementById('math-buttons');
-        math.forEach(array => {
-            let btn = document.createElement('button');
-
-            btn.innerHTML = array.text;
-            btn.className = 'key';
-            btn.id = array.id;
-            btn.dataset.title = array.dataTitle;
-
-            mathDiv.appendChild(btn);
-        });
-    </script>
-
-    <script type="module">
-        import arrows from './app/js/arrows.js';
-
-        const arrowsDiv = document.getElementById('arrows-buttons');
-        arrows.forEach(array => {
-            let btn = document.createElement('button');
-
-            btn.innerHTML = array.text;
-            btn.className = 'key';
-            btn.id = array.id;
-            btn.dataset.title = array.dataTitle;
-
-            arrowsDiv.appendChild(btn);
-        });
-    </script>
-
-    <script type="module">
-        import emojisData from './app/js/emojis.js'
-
-        for (const category in emojisData) {
-            const emojisDiv = document.getElementById(`${category}-buttons`);
-            emojisData[category].forEach(array => {
-                let btn = document.createElement('button');
-
-                btn.innerHTML = array.text;
-                btn.className = 'key';
-                btn.id = array.id;
-                btn.dataset.title = array.dataTitle;
-
-                emojisDiv.appendChild(btn);
-            });
-        }
-    </script>
-    <!-- Script-Create-Buttons-end -->
-    <!-- Script addEventListener start -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const buttons = document.querySelectorAll('.key'); // Select all buttons with class .key
-            let confirmationTimeout;
-
-            buttons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const copiedText = button.textContent;
-                    navigator.clipboard.writeText(copiedText);
-                    clearTimeout(confirmationTimeout);
-                    confirmation(copiedText);
-                });
-            });
-
-            function confirmation(copiedText) {
-                const confirmElement = document.getElementById("confirm");
-                confirmElement.textContent = `${copiedText} copied`;
-                confirmElement.classList.add("anime");
-                confirmationTimeout = setTimeout(() => {
-                    confirmElement.classList.remove("anime");
-                }, 800);
-            }
-        });
-    </script>
-    <!-- Script addEventListener end-->
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
@@ -433,6 +306,15 @@
             });
         });
     </script>
+
+    <!-- Script-Create-Buttons-start-->
+    <script src="app/js/create-currencies-buttons.js"></script>
+    <script src="app/js/create-punctuation-buttons.js"></script>
+    <script src="app/js/create-diacritics-buttons.js"></script>
+    <script src="app/js/create-math-buttons.js"></script>
+    <script src="app/js/create-arrows-buttons.js"></script>
+    <script src="app/js/create-emojis-buttons.js"></script>
+    <!-- Script-Create-Buttons-end -->
 </body>
 
 </html>
